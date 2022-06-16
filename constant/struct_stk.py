@@ -698,7 +698,7 @@ STRUCT_STK ={
     }
     },
     NAME_STK[8]: {
-        'func' : None, 
+        'func' : repeat,
         BUSINESS_TYPE[0]:{
             REPEAT_TYPE[0] : {
                 8: {
@@ -1034,6 +1034,7 @@ STRUCT_STK ={
         },
     },
     NAME_STK[9]: {
+        'func' : loc_phat,
         BUSINESS_TYPE[0]:{
             8 : {
                 'cost' : 0.5,
@@ -1041,7 +1042,7 @@ STRUCT_STK ={
                 'struct': "{number}6868",
                 'num_spe' : 0,
                 'num_nor' : 4,
-                'insert_type' : None 
+                'insert_type' : None
             },
             10 : {
                 'cost' : 0.5,
@@ -1069,7 +1070,7 @@ STRUCT_STK ={
                 'cost' : 0.1,
                 'limit' : None,
                 'struct': "{number}{A}{B}{C}{D}",
-                'num_spe' : 0,
+                'num_spe' : 4,
                 'num_nor' : 4,
                 'insert_type' : INSERT_TYPE[5]
             },
@@ -1077,7 +1078,7 @@ STRUCT_STK ={
                 'cost' : 0.1,
                 'limit' : None,
                 'struct': "{number}{A}{B}{C}{D}",
-                'num_spe' : 0,
+                'num_spe' : 4,
                 'num_nor' : 6,
                 'insert_type': INSERT_TYPE[5]
             },
@@ -1085,7 +1086,7 @@ STRUCT_STK ={
                 'cost' : 0.1,
                 'limit' : None,
                 'struct': "{number}{A}{B}{C}{D}",
-                'num_spe' : 0,
+                'num_spe' : 4,
                 'num_nor' : 8,
                 'insert_type': INSERT_TYPE[5]
             },

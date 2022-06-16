@@ -1,6 +1,6 @@
 import random
-from constant.stk import BUSINESS_TYPE, TYPE_FOUR_FOUR_10
-from random_number import rand_mirror, rand_repeat, rand_special_number , rand_list,rand_dict, random_option
+from constant.stk import BUSINESS_TYPE, TYPE_FOUR_FOUR_10,INSERT_TYPE
+from random_number import rand_mirror, rand_repeat, rand_special_number , rand_list,rand_dict, random_option,random_loc_phat
 from tools import format_number, format_number1, get_cost_arr,get_data, format_spe, get_data_4_4, get_mirror_type, get_num_nor, get_number, get_repeat_type, merge_num_spe
 
 
@@ -154,21 +154,18 @@ def mirror(stk_type, size,is_vip,business_type=None,option=None):
         account_str = merge_num_spe(account_struct['struct'],spe,number)
 
     except:
-        raise KeyError 
+        raise KeyError
     return account_str, cost
 
 
 def repeat(stk_type, size,is_vip,business_type=None,option=None):
     try:
-        if size == 10 and is_vip :
-            raise ValueError
 
-
-        mirror_type = get_repeat_type(option)
+        repeat_type = get_repeat_type(option)
         try:
-            account_struct = stk_type[mirror_type][str(size)]
+            account_struct = stk_type[repeat_type][str(size)]
         except:
-            account_struct = stk_type[mirror_type][size]
+            account_struct = stk_type[repeat_type][size]
         cost, arr  = get_cost_arr(account_struct,is_vip)
         account_struct = rand_dict(account_struct['format'])
         num_spe,num_nor,limit = get_number(account_struct)
@@ -184,4 +181,52 @@ def repeat(stk_type, size,is_vip,business_type=None,option=None):
 
     except:
         raise KeyError 
+    return account_str, cost
+
+
+def loc_phat(stk_type, size,is_vip,business_type=None,option=None):
+    try:
+        if not is_vip :
+            raise ValueError
+        try:
+            account_struct = stk_type[str(size)]
+        except:
+            account_struct = stk_type[size]
+        arr, limit, num_spe, num_nor, cost = get_data(account_struct, is_vip)
+
+
+        limit, arr_nor_n = random_option(arr, None, num_nor, limit, INSERT_TYPE[0])
+
+        number = format_number(arr_nor_n)
+        account_str = account_struct['struct'].format(number = number)
+
+    except:
+        raise KeyError
+    return account_str, cost
+
+def end_spe(stk_type, size,is_vip,business_type=None,option=None):
+    try:
+        if is_vip :
+            raise ValueError
+        try:
+            account_struct = stk_type[str(size)]
+        except:
+            account_struct = stk_type[size]
+        arr, limit, num_spe, num_nor, cost = get_data(account_struct, is_vip)
+        limit = 20
+        limit, arr_spe_n = rand_special_number(arr, num_spe, limit)
+
+        limit, arr_nor_n = random_option(arr, arr_spe_n, num_nor, limit)
+
+        spe, flag = format_spe(account_struct['struct'], arr_spe_n)
+        if flag:
+            return spe, cost
+
+        limit, arr_nor_n = random_loc_phat(arr, None, num_nor, limit, INSERT_TYPE[0])
+
+        number = format_number(arr_nor_n)
+        account_str = account_struct['struct'].format(number = number)
+
+    except:
+        raise KeyError
     return account_str, cost
