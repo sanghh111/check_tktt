@@ -1,0 +1,20 @@
+STK gom 3 loai
+    8 so
+    10 so
+    12 so
+
+So giong nhau  (XONG)
+    tu dau - duoi deu la 1 so (Ca nhan + to chuc)
+        Normal : 1-5
+        VIP: 6-9
+
+So lien tuc (CHUA LAM)
+    Ca Nhan Khong ap dung
+    To chuc
+
+
+
+Tam hoa - Tam hoa
+
+    personal : 
+        8 so : 
