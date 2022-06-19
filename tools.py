@@ -69,6 +69,8 @@ def delete_item_list(arr: list, value):
 def get_num_nor(struct):
     return struct['num_nor']
 
+def get_nor_spe(struct):
+    return struct['num_nor'],struct['num_spe']
 
 def get_cost_arr(struct, is_vip):
     arr = [i for i in range(1, 10)] if not is_vip else [i for i in range(6, 10)]
@@ -87,16 +89,20 @@ def get_number(struct):
     return struct['num_spe'], struct['num_nor'], struct['limit']
     pass
 
+
+
+# True state arr =4
+# if struct can be mirror then return True else None 
+# 
+# Example : arr [1,2,3] can't find 1 number transfer to mirror number
+#           arr [1,2,2] can find 1 number transfer mirror number is 1 (posision first)  
+
+
+# TODO : UPDATE AUTO CHECK_MIRROR
 def check_mirror(arr):
     len_arr = len(arr) + 1
     half_len_arr = int((len_arr / 2 ))
     for i in range(half_len_arr-1):
-        print((i))
-        print(arr[half_len_arr -i -1 ])
         if arr[half_len_arr -i -1 ] != arr[half_len_arr + i] :
             return  False
     return True
-
-
-arr = [1,2,2,2]
-print(check_mirror(arr))

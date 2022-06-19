@@ -1064,11 +1064,12 @@ STRUCT_STK ={
         BUSINESS_TYPE[1]: None,
     },
     NAME_STK[10]: {
-        BUSINESS_TYPE[0] : None,
-        BUSINESS_TYPE[1]: {
+        'func': end_spe,
+        BUSINESS_TYPE[1] : None,
+        BUSINESS_TYPE[0]: {
             8 : {
                 'cost' : 0.1,
-                'limit' : None,
+                'limit' : 20,
                 'struct': "{number}{A}{B}{C}{D}",
                 'num_spe' : 4,
                 'num_nor' : 4,
@@ -1076,7 +1077,7 @@ STRUCT_STK ={
             },
             10 : {
                 'cost' : 0.1,
-                'limit' : None,
+                'limit' : 20,
                 'struct': "{number}{A}{B}{C}{D}",
                 'num_spe' : 4,
                 'num_nor' : 6,
@@ -1084,7 +1085,7 @@ STRUCT_STK ={
             },
             12 : {
                 'cost' : 0.1,
-                'limit' : None,
+                'limit' : 20,
                 'struct': "{number}{A}{B}{C}{D}",
                 'num_spe' : 4,
                 'num_nor' : 8,
@@ -1093,20 +1094,21 @@ STRUCT_STK ={
         }
     },
     NAME_STK[11]: {
+        'func': end_same_number,
         BUSINESS_TYPE[0] : None,
         BUSINESS_TYPE[1]: {
             8 : {
                 'cost' : 8,
-                format : {
+                'format' : {
                     1: {
-                        'struct': "{number}{A}*7",
+                        'struct': "{number}"+"{A}"*7,
                         'limit' : 1,
                         'num_spe' : 1,
                         'num_nor' : 1,
                         'insert_type' : INSERT_TYPE[0]
                         },
                     2: {
-                        'struct': "{number}{A}*6",
+                        'struct': "{number}"+"{A}"*6,
                         'limit' : 2,
                         'num_spe' : 1,
                         'num_nor' : 2,
@@ -1116,30 +1118,30 @@ STRUCT_STK ={
             },
             10 : {
                 'cost' : 8,
-                format : {
+                'format' : {
                     1: {
-                        'struct': "{number}{A}*9",
+                        'struct': "{number}"+"{A}"*9,
                         'limit' : 1,
                         'num_spe' : 1,
                         'num_nor' : 1,
                         'insert_type' : INSERT_TYPE[0]
                         },
                     2: {
-                        'struct': "{number}{A}*8",
+                        'struct': "{number}"+"{A}"*8,
                         'limit' : 2,
                         'num_spe' : 1,
                         'num_nor' : 2,
                         'insert_type' : INSERT_TYPE[0]
                         },
                     3: {
-                        'struct': "{number}{A}*7",
+                        'struct': "{number}"+"{A}"*7,
                         'limit' : 3,
                         'num_spe' : 1,
                         'num_nor' : 3,
                         'insert_type' : INSERT_TYPE[0]
                         },
                     4: {
-                        'struct': "{number}{A}*6",
+                        'struct': "{number}"+"{A}"*6,
                         'limit' : 4,
                         'num_spe' : 1,
                         'num_nor' : 4,
@@ -1149,44 +1151,44 @@ STRUCT_STK ={
             },
             12 : {
                 'cost' : 8,
-                format : {
+                'format' : {
                     1: {
-                        'struct': "{number}{A}*11",
+                        'struct': "{number}"+"{A}"*1,
                         'limit' : 1,
                         'num_spe' : 1,
                         'num_nor' : 1,
                         'insert_type' : INSERT_TYPE[0]
                         },
                     2: {
-                        'struct': "{number}{A}*10",
+                        'struct': "{number}"+"{A}"*1,
                         'limit' : 2,
                         'num_spe' : 1,
                         'num_nor' : 2,
                         'insert_type' : INSERT_TYPE[0]
                         },
                     3: {
-                        'struct': "{number}{A}*9",
+                        'struct': "{number}"+"{A}"*9,
                         'limit' : 3,
                         'num_spe' : 1,
                         'num_nor' : 3,
                         'insert_type' : INSERT_TYPE[0]
                         },
                     4: {
-                        'struct': "{number}{A}*8",
+                        'struct': "{number}"+"{A}"*8,
                         'limit' : 4,
                         'num_spe' : 1,
                         'num_nor' : 4,
                         'insert_type' : INSERT_TYPE[0]
                         },
                     5: {
-                        'struct': "{number}{A}*7",
+                        'struct': "{number}"+"{A}"*7,
                         'limit' : 5,
                         'num_spe' : 1,
                         'num_nor' : 5,
                         'insert_type' : INSERT_TYPE[0]
                         },
                     6: {
-                        'struct': "{number}{A}*6",
+                        'struct': "{number}"+"{A}"*6,
                         'limit' : 6,
                         'num_spe' : 1,
                         'num_nor' : 6,

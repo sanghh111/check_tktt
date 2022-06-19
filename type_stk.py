@@ -1,7 +1,7 @@
 import random
 from constant.stk import BUSINESS_TYPE, TYPE_FOUR_FOUR_10,INSERT_TYPE
-from random_number import rand_mirror, rand_repeat, rand_special_number , rand_list,rand_dict, random_option,random_loc_phat
-from tools import format_number, format_number1, get_cost_arr,get_data, format_spe, get_data_4_4, get_mirror_type, get_num_nor, get_number, get_repeat_type, merge_num_spe
+from random_number import rand_mirror, rand_repeat, rand_special_number , rand_list,rand_dict, random_end_nor, rand_no_option, random_option,random_loc_phat, random_end_spe
+from tools import format_number, format_number1, get_cost_arr,get_data, format_spe, get_data_4_4, get_mirror_type, get_nor_spe, get_num_nor, get_number, get_repeat_type, merge_num_spe
 
 
 
@@ -162,6 +162,7 @@ def repeat(stk_type, size,is_vip,business_type=None,option=None):
     try:
 
         repeat_type = get_repeat_type(option)
+        print('stk_type: ', stk_type)
         try:
             account_struct = stk_type[repeat_type][str(size)]
         except:
@@ -212,20 +213,85 @@ def end_spe(stk_type, size,is_vip,business_type=None,option=None):
             account_struct = stk_type[str(size)]
         except:
             account_struct = stk_type[size]
+        
         arr, limit, num_spe, num_nor, cost = get_data(account_struct, is_vip)
+        arr_spe = [i for i in range(6,10)]
         limit = 20
-        limit, arr_spe_n = rand_special_number(arr, num_spe, limit)
+        limit, arr_spe_n = random_end_spe(arr_spe, num_spe, limit)
 
-        limit, arr_nor_n = random_option(arr, arr_spe_n, num_nor, limit)
+        limit, arr_nor_n = random_end_nor(arr, arr_spe_n, num_nor, limit)
 
         spe, flag = format_spe(account_struct['struct'], arr_spe_n)
         if flag:
             return spe, cost
 
-        limit, arr_nor_n = random_loc_phat(arr, None, num_nor, limit, INSERT_TYPE[0])
+        limit, arr_nor_n = random_loc_phat(arr, None, num_nor, limit)
 
         number = format_number(arr_nor_n)
-        account_str = account_struct['struct'].format(number = number)
+        account_str = merge_num_spe(account_struct['struct'],spe,number = number)
+
+    except:
+        raise KeyError
+    return account_str, cost
+
+
+def end_same_number(stk_type, size,is_vip,business_type=None,option=None):
+    try:
+        try:
+            account_struct = stk_type[str(size)]
+        except:
+            account_struct = stk_type[size]
+        
+        cost , arr = get_cost_arr(account_struct, is_vip)
+        limit = 20
+
+        account_struct = rand_dict(account_struct['format'])
+
+        num_nor,num_spe = get_nor_spe(account_struct)
+
+        limit, arr_spe_n = random_end_spe(arr, num_spe, limit)
+
+        limit, arr_nor_n = rand_no_option(arr, arr_spe_n, num_nor, limit)
+
+        spe, flag = format_spe(account_struct['struct'], arr_spe_n)
+        if flag:
+            return spe, cost
+
+        limit, arr_nor_n = random_loc_phat(arr, None, num_nor, limit)
+
+        number = format_number(arr_nor_n)
+        account_str = merge_num_spe(account_struct['struct'],spe,number = number)
+
+    except:
+        raise KeyError
+    return account_str, cost
+
+def end_special_number(stk_type, size,is_vip,business_type=None,option=None):
+    try:
+        try:
+            account_struct = stk_type[str(size)]
+        except:
+            account_struct = stk_type[size]
+        
+        arr, limit, num_spe, num_nor, cost = get_data(account_struct, is_vip)
+        limit = 20
+
+        account_struct = rand_dict(account_struct['format'])
+
+        num_nor,num_spe = get_nor_spe(account_struct)
+
+        limit, arr_spe_n = random_end_spe(arr, num_spe, limit)
+
+        limit, arr_nor_n = rand_no_option(arr, arr_spe_n, num_nor, limit)
+
+        spe, flag = format_spe(account_struct['struct'], arr_spe_n)
+        if flag:
+            return spe, cost
+
+        limit, arr_nor_n = random_loc_phat(arr, None, num_nor, limit)
+
+        number = format_number(arr_nor_n)
+        account_str = merge_num_spe(account_struct['struct'],spe,number = number)
 
     except:
         raise KeyError

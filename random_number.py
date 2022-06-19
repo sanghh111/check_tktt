@@ -1,5 +1,7 @@
+from cgitb import reset
 import random
-from constant.stk import INSERT_TYPE, TEMP_COPARE_MIRROR
+from unittest import result
+from constant.stk import ARR_SAME_LOC_PHAT, INSERT_TYPE, TEMP_COPARE_MIRROR
 from tools import  check_mirror
 
 from tools import delete_item_list
@@ -19,6 +21,18 @@ def rand_special_number(arr: list, len_n, limit):
         limit = limit - 1 if temp_int >= 6 and temp_int <= 9 else limit
     return limit, result
 
+
+def random_end_spe(arr: list, len_n, limit):
+    result = []
+    temp_arr = arr.copy()
+    for i in range(len_n):
+        if i == len_n -1:
+            temp_arr.remove(8) if result == ARR_SAME_LOC_PHAT else None
+        value = random.randint(0, len(temp_arr) - 1)
+        temp_int = temp_arr[value]
+        temp_arr = arr.copy()
+        result.append(temp_int)
+    return limit, result
 
 def rand_list(arr: list):
     value = random.randint(0, len(arr) - 1)
@@ -91,7 +105,7 @@ def rand_repeat(arr: list, spe_num: list, len_n, limit, option=None):
     for i in range(len_n):
         [temp_arr.remove(j) for j in range(6, 10)] if limit == 0 else None
         if i == len_n - 1:
-            delete_item_list(temp_arr, 8) if temp_int == 6 and option == INSERT_TYPE[1] else None
+            delete_item_list(temp_arr, 8) if result == ARR_SAME_LOC_PHAT and option == INSERT_TYPE[1] else None
             # if len(spe_num) == 2 :
             temp_spe_arr = []
             len_spe_num = len(spe_num)
@@ -101,7 +115,7 @@ def rand_repeat(arr: list, spe_num: list, len_n, limit, option=None):
             if len_spe_num == 2 and len_n == 2:
                 delete_item_list(temp_arr,spe_num[0]) if temp_int == spe_num[-1] else None
             else :
-                delete_item_list(temp_arr,spe_num[0]) if check_mirror(result) else None
+                delete_item_list(temp_arr,result[0]) if check_mirror(result) else None
         value = random.randint(0, len(temp_arr) - 1)
         limit = limit - 1 if temp_arr[value] >= 6 and temp_arr[value] <= 9 else limit
         temp_int = temp_arr[value]
@@ -126,20 +140,30 @@ def random_loc_phat(arr: list, spe_num: list, len_n, limit, option=None):
         result.append(temp_int)
     return limit, result
 
-def random_end_spe(arr: list, spe_num: list, len_n, limit, option=None):
+def random_end_nor(arr: list, spe_num: list, len_n, limit, option=None):
     result = []
     temp_int = None
     temp_arr = arr.copy()
     
     for i in range(len_n):
-        [temp_arr.remove(j) for j in range(6, 10)] if limit == 0 else None
         if i >= 2:
             delete_item_list(temp_arr, result[i - 1]) if result[i - 1] == result[i - 2] else None
-            delete_item_list(temp_arr, spe_num[0]) if check_mirror(result) else None
+            for j in range(0,len_n-3):
+                for k in range(3+j,len_n,2):   
+                    delete_item_list(temp_arr, result[j]) if check_mirror(result) else None
         value = random.randint(0, len(temp_arr) - 1)
-        limit = limit - 1 if temp_arr[value] >= 6 and temp_arr[value] <= 9 else limit
         temp_int = temp_arr[value]
         temp_arr = arr.copy()
         result.append(temp_int)
+    return limit, result
+
+def rand_no_option(arr: list, spe_num: list, len_n, limit, option=None):
+    result = []
+    temp_int = None
+    temp_arr = arr.copy()
+    
+    for i in range(len_n):
+        value = rand_list(temp_arr)
+        result.append(value)
     return limit, result
 
